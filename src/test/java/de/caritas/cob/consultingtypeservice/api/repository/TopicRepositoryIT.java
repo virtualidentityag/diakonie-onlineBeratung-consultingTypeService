@@ -191,13 +191,13 @@ class TopicRepositoryIT {
               .name(NEW_TOPIC_NAME)
               .description("desc")
               .createDate(LocalDateTime.now())
-              .isvideoCallAllowed(true)
+              .isVideoCallAllowed(true)
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then
       assertThat(savedTopicEntity).isNotNull();
       val newTopic = topicRepository.findByName(NEW_TOPIC_NAME).orElseThrow();
-      assertThat(newTopic.getIsvideoCallAllowed()).isEqualTo(true);
+      assertThat(newTopic.getIsVideoCallAllowed()).isEqualTo(true);
       assertThat(topicRepository.findAll()).hasSize(4);
     }
 
@@ -214,7 +214,7 @@ class TopicRepositoryIT {
       // then
       assertThat(savedTopicEntity).isNotNull();
       val newTopic = topicRepository.findByName(NEW_TOPIC_NAME).orElseThrow();
-      assertThat(newTopic.getIsvideoCallAllowed()).isFalse();
+      assertThat(newTopic.getIsVideoCallAllowed()).isFalse();
       assertThat(topicRepository.findAll()).hasSize(4);
     }
   }

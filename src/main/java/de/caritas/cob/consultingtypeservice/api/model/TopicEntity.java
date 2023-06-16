@@ -68,5 +68,5 @@ public class TopicEntity implements TenantAware {
 
   @Builder.Default
   @Column(name = "isVideoCallAllowed")
-  private Boolean isvideoCallAllowed = Boolean.FALSE;
+  private Boolean isVideoCallAllowed = Boolean.FALSE;
 }
