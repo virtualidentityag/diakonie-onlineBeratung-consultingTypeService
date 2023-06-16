@@ -180,4 +180,42 @@ class TopicRepositoryIT {
       assertThat(topicRepository.findAll()).hasSize(4);
     }
   }
+
+  @Nested
+  class IsVideoCallAllowedTests {
+    @Test
+    void save_Should_saveNewTopic_withIsVideoCallAllowedSet() {
+      // given
+      val topicEntity =
+          TopicEntity.builder()
+              .name(NEW_TOPIC_NAME)
+              .description("desc")
+              .createDate(LocalDateTime.now())
+              .isVideoCallAllowed(true)
+              .build();
+      var savedTopicEntity = topicRepository.save(topicEntity);
+      // then
+      assertThat(savedTopicEntity).isNotNull();
+      val newTopic = topicRepository.findByName(NEW_TOPIC_NAME).orElseThrow();
+      assertThat(newTopic.getIsVideoCallAllowed()).isEqualTo(true);
+      assertThat(topicRepository.findAll()).hasSize(4);
+    }
+
+    @Test
+    void save_Should_saveNewTopic_without_IsVideoCallAllowedSet() {
+      // given
+      val topicEntity =
+          TopicEntity.builder()
+              .name(NEW_TOPIC_NAME)
+              .description("desc")
+              .createDate(LocalDateTime.now())
+              .build();
+      var savedTopicEntity = topicRepository.save(topicEntity);
+      // then
+      assertThat(savedTopicEntity).isNotNull();
+      val newTopic = topicRepository.findByName(NEW_TOPIC_NAME).orElseThrow();
+      assertThat(newTopic.getIsVideoCallAllowed()).isFalse();
+      assertThat(topicRepository.findAll()).hasSize(4);
+    }
+  }
 }
