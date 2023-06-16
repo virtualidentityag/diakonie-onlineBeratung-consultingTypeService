@@ -170,24 +170,4 @@ class TopicControllerIT {
         topics.stream().filter(t -> t.getId() == 3).findFirst().orElseThrow();
     assertThat(topicWithoutWelcomeMessage.getWelcomeMessage()).isNull();
   }
-
-  @Test
-  void getAllActiveTopics_Should_returnActiveTopicsListWithOrWithoutIsVideoCallAllowed()
-      throws Exception {
-    TenantContext.clear();
-    val result =
-        mockMvc
-            .perform(get(PATH_GET_PUBLIC_TOPIC_LIST).accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk());
-    val topics =
-        objectMapper.readValue(
-            result.andReturn().getResponse().getContentAsString(),
-            new TypeReference<List<TopicDTO>>() {});
-    val topicWithIsVideoCallAllowedTrue =
-        topics.stream().filter(t -> t.getId() == 1).findFirst().orElseThrow();
-    assertThat(topicWithIsVideoCallAllowedTrue.getIsVideoCallAllowed()).isEqualTo(true);
-    val topicWithIsVideoCallAllowedFalse =
-        topics.stream().filter(t -> t.getId() == 3).findFirst().orElseThrow();
-    assertThat(topicWithIsVideoCallAllowedFalse.getIsVideoCallAllowed()).isEqualTo(false);
-  }
 }

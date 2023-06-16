@@ -12,5 +12,4 @@
   <include file="/db/changelog/changeset/0005_topic_fallback_agency_id/topic_fallback_agency_id.xml"/>
   <include file="db/changelog/changeset/0007_topic_welcome_message/topic_welcome_message.xml"/>
   <include file="db/changelog/changeset/0008_topic_send_next_step_message/topic_send_next_step_message.xml"/>
-  <include file="db/changelog/changeset/0009_topic_is_video_call_allowed/topic_is_video_call_allowed.xml"/>
 </databaseChangeLog>
