@@ -39,9 +39,6 @@ public class TopicConverter {
             .fallbackUrl(topic.getFallbackUrl())
             .welcomeMessage(topic.getWelcomeMessage())
             .internalIdentifier(topic.getInternalIdentifier());
-    if (topic.getIsVideoCallAllowed() != null) {
-      topicDTO.setIsVideoCallAllowed(topic.getIsVideoCallAllowed());
-    }
     if (topic.getCreateDate() != null) {
       topicDTO.setCreateDate(topic.getCreateDate().toString());
     }
@@ -67,9 +64,6 @@ public class TopicConverter {
             .fallbackUrl(topic.getFallbackUrl())
             .welcomeMessage(topic.getWelcomeMessage())
             .internalIdentifier(topic.getInternalIdentifier());
-    if (topic.getIsVideoCallAllowed() != null) {
-      topicMultilingualDTO.setIsVideoCallAllowed(topic.getIsVideoCallAllowed());
-    }
     if (topic.getCreateDate() != null) {
       topicMultilingualDTO.setCreateDate(topic.getCreateDate().toString());
     }
@@ -99,7 +93,6 @@ public class TopicConverter {
     topicEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     topicEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     topicEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
-    topicEntity.setIsVideoCallAllowed(topicDTO.getIsVideoCallAllowed());
     return topicEntity;
   }
 
@@ -112,7 +105,6 @@ public class TopicConverter {
     targetEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     targetEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     targetEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
-    targetEntity.setIsVideoCallAllowed(topicDTO.getIsVideoCallAllowed());
     return targetEntity;
   }
 

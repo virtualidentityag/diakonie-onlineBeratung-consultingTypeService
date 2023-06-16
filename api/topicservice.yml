@@ -252,10 +252,6 @@ components:
       type: string
       format: url
       maxLength: 200
-    IsVideoCallAllowed:
-      type: boolean
-      example: true
-      default: false
     TopicDTO:
       type: object
       required:
@@ -291,8 +287,6 @@ components:
           $ref: '#/components/schemas/FallBackUrl'
         welcomeMessage:
           $ref: '#/components/schemas/WelcomeMessage'
-        isVideoCallAllowed:
-          $ref: '#/components/schemas/IsVideoCallAllowed'
 
     TopicMultilingualDTO:
       type: object
@@ -329,8 +323,6 @@ components:
           $ref: '#/components/schemas/FallBackUrl'
         welcomeMessage:
           $ref: '#/components/schemas/WelcomeMessage'
-        isVideoCallAllowed:
-          $ref: '#/components/schemas/IsVideoCallAllowed'
 
     Translation:
       type: object
