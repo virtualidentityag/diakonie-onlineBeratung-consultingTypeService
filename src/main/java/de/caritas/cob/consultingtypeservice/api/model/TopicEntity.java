@@ -65,4 +65,8 @@ public class TopicEntity implements TenantAware {
 
   @Column(name = "send_next_step_message")
   private Boolean sendNextStepMessage;
+
+  @Builder.Default
+  @Column(name = "isVideoCallAllowed")
+  private Boolean isvideoCallAllowed = Boolean.FALSE;
 }

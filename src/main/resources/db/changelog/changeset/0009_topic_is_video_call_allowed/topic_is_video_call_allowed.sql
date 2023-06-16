@@ -1,0 +1,1 @@
+ALTER TABLE consultingtypeservice.`topic` ADD is_video_call_allowed BOOLEAN not null default false;
