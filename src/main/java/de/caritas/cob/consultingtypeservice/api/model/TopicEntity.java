@@ -65,4 +65,19 @@ public class TopicEntity implements TenantAware {
 
   @Column(name = "send_next_step_message")
   private Boolean sendNextStepMessage;
+
+  @Column(name = "titles_default")
+  private String titlesDefault;
+
+  @Column(name = "titles_short")
+  private String titlesShort;
+
+  @Column(name = "titles_long")
+  private String titlesLong;
+
+  @Column(name = "titles_welcome")
+  private String titlesWelcome;
+
+  @Column(name = "titles_dropdown")
+  private String titlesDropdown;
 }
