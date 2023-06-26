@@ -3,14 +3,12 @@ package de.caritas.cob.consultingtypeservice.api.converter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import de.caritas.cob.consultingtypeservice.api.model.TopicDTO;
-import de.caritas.cob.consultingtypeservice.api.model.TopicEntity;
-import de.caritas.cob.consultingtypeservice.api.model.TopicMultilingualDTO;
-import de.caritas.cob.consultingtypeservice.api.model.TopicStatus;
+import de.caritas.cob.consultingtypeservice.api.model.*;
 import de.caritas.cob.consultingtypeservice.api.service.TranslationService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,6 +34,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name(name)
+            .titles(new TitlesDTO()._short("ts")._long("tl")._default("td").registrationDropdown("td").welcome("tw"))
             .description(description);
 
     // when
@@ -58,6 +57,11 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesDefault("td")
+            .titlesDropdown("td")
+            .titlesWelcome("tw")
             .build();
     final var topicEntity2 =
         TopicEntity.builder()
@@ -66,14 +70,21 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesDefault("td")
+            .titlesDropdown("td")
+            .titlesWelcome("tw")
             .build();
 
+    val titles = new TitlesDTO()._short("ts")._long("tl")._default("td").registrationDropdown("td").welcome("tw");
     final var topicDTO1 =
         new TopicDTO()
             .id(1L)
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name("name en")
+            .titles(titles)
             .description("desc en");
     final var topicDTO2 =
         new TopicDTO()
@@ -81,6 +92,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier 2")
             .name("name 2 en")
+            .titles(titles)
             .description("desc 2 en");
 
     // when
@@ -102,6 +114,11 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesDefault("td")
+            .titlesDropdown("td")
+            .titlesWelcome("tw")
             .build();
     final var topicEntity2 =
         TopicEntity.builder()
@@ -110,14 +127,21 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesDefault("td")
+            .titlesDropdown("td")
+            .titlesWelcome("tw")
             .build();
 
+    val titles = new TitlesDTO().registrationDropdown("td").welcome("tw")._default("td")._long("tl")._short("ts");
     final var topicDTO1 =
         new TopicDTO()
             .id(1L)
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name("name de")
+            .titles(titles)
             .description("desc de");
     final var topicDTO2 =
         new TopicDTO()
@@ -125,6 +149,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier 2")
             .name("name 2 de")
+            .titles(titles)
             .description("desc 2 de");
 
     // when
@@ -138,6 +163,8 @@ class TopicConverterTest {
   void
       toMultilingualDTOList_Should_convertCollectionOfTopicEntitiesToListOfTopicMultilingualDTOs() {
     // given
+    val titles =
+        new TitlesDTO()._default("d")._long("l")._short("s").registrationDropdown("r").welcome("w");
     final var topicEntity1 =
         TopicEntity.builder()
             .id(1L)
@@ -145,6 +172,11 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
+            .titlesDefault(titles.getDefault())
+            .titlesLong(titles.getLong())
+            .titlesShort(titles.getShort())
+            .titlesDropdown(titles.getRegistrationDropdown())
+            .titlesWelcome(titles.getWelcome())
             .build();
     final var topicEntity2 =
         TopicEntity.builder()
@@ -153,6 +185,11 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
+            .titlesDefault(titles.getDefault())
+            .titlesLong(titles.getLong())
+            .titlesShort(titles.getShort())
+            .titlesWelcome(titles.getWelcome())
+            .titlesDropdown(titles.getRegistrationDropdown())
             .build();
 
     final Map<String, String> name1 = new HashMap<>();
@@ -173,14 +210,16 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name(name1)
-            .description(description1);
+            .description(description1)
+            .titles(titles);
     final var topicDTO2 =
         new TopicMultilingualDTO()
             .id(2L)
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier 2")
             .name(name2)
-            .description(description2);
+            .description(description2)
+            .titles(titles);
 
     // when
     final var entities = topicConverter.toMultilingualDTOList(List.of(topicEntity1, topicEntity2));

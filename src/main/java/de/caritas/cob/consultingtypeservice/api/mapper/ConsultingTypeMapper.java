@@ -7,7 +7,6 @@ import de.caritas.cob.consultingtypeservice.api.model.AnonymousScreenDTO;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOFurtherInformation;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOGroupChat;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTORegistration;
-import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOTitles;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOUrls;
 import de.caritas.cob.consultingtypeservice.api.model.NotificationsDTO;
 import de.caritas.cob.consultingtypeservice.api.model.NotificationsDTOTeamSessions;
@@ -29,7 +28,6 @@ import de.caritas.cob.consultingtypeservice.schemas.model.Registration;
 import de.caritas.cob.consultingtypeservice.schemas.model.Roles;
 import de.caritas.cob.consultingtypeservice.schemas.model.SessionDataInitializing;
 import de.caritas.cob.consultingtypeservice.schemas.model.TeamSessions;
-import de.caritas.cob.consultingtypeservice.schemas.model.Titles;
 import de.caritas.cob.consultingtypeservice.schemas.model.Urls;
 import de.caritas.cob.consultingtypeservice.schemas.model.WelcomeMessage;
 import de.caritas.cob.consultingtypeservice.schemas.model.WelcomeScreen;
@@ -48,15 +46,6 @@ public class ConsultingTypeMapper {
             .label(furtherInformation.getLabel())
             .url(furtherInformation.getUrl())
         : null;
-  }
-
-  protected static BasicConsultingTypeResponseDTOTitles mapTitles(Titles titles) {
-    return new BasicConsultingTypeResponseDTOTitles()
-        ._default(titles.getDefault())
-        ._long(titles.getLong())
-        ._short(titles.getShort())
-        .registrationDropdown(titles.getRegistrationDropdown())
-        .welcome(titles.getWelcome());
   }
 
   protected static BasicConsultingTypeResponseDTOUrls mapUrls(Urls urls) {

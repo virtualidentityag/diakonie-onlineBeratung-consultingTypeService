@@ -1,9 +1,7 @@
 package de.caritas.cob.consultingtypeservice.api.mapper.group;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 import de.caritas.cob.consultingtypeservice.api.model.ConsultingTypeGroupResponseDTO;
 import de.caritas.cob.consultingtypeservice.schemas.model.ConsultingType;
@@ -30,10 +28,6 @@ public class ConsultingTypeGroupResponseMapperTest {
       assertThat(
           result.getConsultingTypes().get(index).getId(),
           is(consultingTypeList.get(index).getId()));
-      assertThat(result.getConsultingTypes().get(index).getTitles(), notNullValue());
-      assertThat(
-          result.getConsultingTypes().get(index).getTitles().getDefault(),
-          is(consultingTypeList.get(index).getTitles().getDefault()));
     }
   }
 }

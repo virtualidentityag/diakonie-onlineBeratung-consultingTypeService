@@ -3,7 +3,6 @@ package de.caritas.cob.consultingtypeservice.api.consultingtypes;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOFurtherInformation;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOGroupChat;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTORegistration;
-import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOTitles;
 import de.caritas.cob.consultingtypeservice.api.model.BasicConsultingTypeResponseDTOUrls;
 import de.caritas.cob.consultingtypeservice.api.model.ConsultingTypeDTO;
 import de.caritas.cob.consultingtypeservice.api.model.ConsultingTypeDTONotifications;
@@ -31,7 +30,6 @@ import de.caritas.cob.consultingtypeservice.schemas.model.Roles;
 import de.caritas.cob.consultingtypeservice.schemas.model.SessionDataInitializing;
 import de.caritas.cob.consultingtypeservice.schemas.model.State;
 import de.caritas.cob.consultingtypeservice.schemas.model.TeamSessions;
-import de.caritas.cob.consultingtypeservice.schemas.model.Titles;
 import de.caritas.cob.consultingtypeservice.schemas.model.Urls;
 import de.caritas.cob.consultingtypeservice.schemas.model.WelcomeMessage;
 import de.caritas.cob.consultingtypeservice.schemas.model.WelcomeScreen;
@@ -85,7 +83,6 @@ public class ConsultingTypeConverter {
         .withRoles(convert(consultingTypeDTO.getRoles()))
         .withNotifications(convert(consultingTypeDTO.getNotifications()))
         .withRegistration(convert(consultingTypeDTO.getRegistration()))
-        .withTitles(convert(consultingTypeDTO.getTitles()))
         .withUrls(convert(consultingTypeDTO.getUrls()))
         .withShowAskerProfile(consultingTypeDTO.getShowAskerProfile())
         .withIsVideoCallAllowed(consultingTypeDTO.getIsVideoCallAllowed())
@@ -121,15 +118,6 @@ public class ConsultingTypeConverter {
     }
     return new Urls(
         urls.getRequiredAidMissingRedirectUrl(), urls.getRegistrationPostcodeFallbackUrl());
-  }
-
-  private Titles convert(BasicConsultingTypeResponseDTOTitles titles) {
-    return new Titles()
-        .withDefault(titles.getDefault())
-        .withLong(titles.getLong())
-        .withShort(titles.getShort())
-        .withRegistrationDropdown(titles.getRegistrationDropdown())
-        .withWelcome(titles.getWelcome());
   }
 
   private Registration convert(BasicConsultingTypeResponseDTORegistration registration) {

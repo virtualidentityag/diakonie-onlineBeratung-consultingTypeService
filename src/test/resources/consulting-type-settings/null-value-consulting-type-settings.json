@@ -56,13 +56,6 @@
       "password": null
     }
   },
-  "titles": {
-    "default": "Null values",
-    "short": "Null",
-    "long": "Null values",
-    "welcome": "Welcome null values!",
-    "registrationDropdown": null
-  },
   "urls": {
     "requiredAidMissingRedirectUrl": null,
     "registrationPostcodeFallbackUrl": null

@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import de.caritas.cob.consultingtypeservice.ConsultingTypeServiceApplication;
 import de.caritas.cob.consultingtypeservice.api.auth.UserRole;
+import de.caritas.cob.consultingtypeservice.api.model.TitlesDTO;
 import de.caritas.cob.consultingtypeservice.api.model.TopicMultilingualDTO;
 import de.caritas.cob.consultingtypeservice.api.model.TopicStatus;
 import de.caritas.cob.consultingtypeservice.api.service.TenantService;
@@ -104,6 +105,13 @@ class TopicAdminControllerIT {
             .withDescription("new desc")
             .withInternalIdentifier("new ident")
             .withStatus(TopicStatus.INACTIVE.toString())
+            .withTitles(
+                new TitlesDTO()
+                    ._default("d")
+                    ._short("l")
+                    ._long("l")
+                    .welcome("l")
+                    .registrationDropdown("dd"))
             .jsonify();
 
     final Authentication authentication = givenMockAuthentication(UserRole.TOPIC_ADMIN);
@@ -201,6 +209,13 @@ class TopicAdminControllerIT {
     final EasyRandom easyRandom = new EasyRandom();
     final TopicMultilingualDTO topicDTO = easyRandom.nextObject(TopicMultilingualDTO.class);
     topicDTO.setStatus(TopicStatus.INACTIVE.toString());
+    topicDTO.setTitles(
+        new TitlesDTO()
+            ._default("default")
+            ._short("short")
+            ._long("long")
+            .welcome("welcome")
+            .registrationDropdown("dd"));
     final String payload = JsonConverter.convertToJson(topicDTO);
     final Authentication authentication = givenMockAuthentication(UserRole.TOPIC_ADMIN);
     mockMvc
