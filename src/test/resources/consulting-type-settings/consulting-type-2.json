@@ -31,12 +31,6 @@
     "notes": {
     }
   },
-  "titles": {
-    "default": "default",
-    "short": "short",
-    "long": "long",
-    "welcome": "welcome"
-  },
   "urls": {
   },
   "isSubsequentRegistrationAllowed": false

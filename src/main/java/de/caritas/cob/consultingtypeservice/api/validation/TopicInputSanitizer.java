@@ -28,6 +28,7 @@ public class TopicInputSanitizer {
     output.setId(input.getId());
     output.setCreateDate(input.getCreateDate());
     output.setUpdateDate(input.getUpdateDate());
+    output.setTitles(input.getTitles());
     return output;
   }
 }

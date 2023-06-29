@@ -214,6 +214,21 @@ paths:
 
 components:
   schemas:
+    TitlesDTO:
+      type: object
+      properties:
+        short:
+          type: string
+          example: "xyz"
+        long:
+          type: string
+          example: "Beratung xyz in Ort"
+        welcome:
+          type: string
+          example: "Herzlich Willkommen zu Beratung xyz"
+        registrationDropdown:
+          type: string
+          example: "Beratung xyz"
     TopicGroupsDTO:
       type: object
       required:
@@ -287,6 +302,8 @@ components:
           $ref: '#/components/schemas/FallBackUrl'
         welcomeMessage:
           $ref: '#/components/schemas/WelcomeMessage'
+        titles:
+          $ref: '#/components/schemas/TitlesDTO'
 
     TopicMultilingualDTO:
       type: object
@@ -323,6 +340,8 @@ components:
           $ref: '#/components/schemas/FallBackUrl'
         welcomeMessage:
           $ref: '#/components/schemas/WelcomeMessage'
+        titles:
+          $ref: '#/components/schemas/TitlesDTO'
 
     Translation:
       type: object

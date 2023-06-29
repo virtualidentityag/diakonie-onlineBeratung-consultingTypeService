@@ -255,9 +255,6 @@ components:
         furtherInformation:
           allOf:
             - $ref: '#/components/schemas/FurtherInformationDTO'
-        titles:
-          allOf:
-            - $ref: '#/components/schemas/TitlesDTO'
         urls:
           allOf:
             - $ref: '#/components/schemas/UrlsDTO'
@@ -382,9 +379,6 @@ components:
         furtherInformation:
           allOf:
             - $ref: '#/components/schemas/FurtherInformationDTO'
-        titles:
-          allOf:
-            - $ref: '#/components/schemas/TitlesDTO'
         urls:
           allOf:
             - $ref: '#/components/schemas/UrlsDTO'
@@ -423,26 +417,6 @@ components:
         url:
           type: string
           example: "https://www.domain.com"
-
-    TitlesDTO:
-      type: object
-      properties:
-        default:
-          type: string
-          example: "Beratung xyz"
-        short:
-          type: string
-          example: "xyz"
-        long:
-          type: string
-          example: "Beratung xyz in Ort"
-        welcome:
-          type: string
-          example: "Herzlich Willkommen zu Beratung xyz"
-        registrationDropdown:
-          type: string
-          example: "Beratung xyz"
-
     UrlsDTO:
       type: object
       properties:

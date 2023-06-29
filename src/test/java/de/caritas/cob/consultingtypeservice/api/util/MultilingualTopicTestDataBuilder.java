@@ -1,5 +1,6 @@
 package de.caritas.cob.consultingtypeservice.api.util;
 
+import de.caritas.cob.consultingtypeservice.api.model.TitlesDTO;
 import de.caritas.cob.consultingtypeservice.api.model.TopicMultilingualDTO;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -43,6 +44,11 @@ public class MultilingualTopicTestDataBuilder {
 
   public MultilingualTopicTestDataBuilder withName() {
     topicMultilingualDTO.setName(translations(NAME, DE));
+    return this;
+  }
+
+  public MultilingualTopicTestDataBuilder withTitles(TitlesDTO titles) {
+    topicMultilingualDTO.setTitles(titles);
     return this;
   }
 

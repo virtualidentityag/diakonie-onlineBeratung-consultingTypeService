@@ -76,13 +76,6 @@
       "password": "Dolor sit amet"
     }
   },
-  "titles": {
-    "default": "default",
-    "short": "short",
-    "long": "long",
-    "welcome": "welcome",
-    "registrationDropdown": "dropdown"
-  },
   "urls": {
     "requiredAidMissingRedirectUrl": "https://www.domain.tld/requiredAidMissingRedirectPath",
     "registrationPostcodeFallbackUrl": "https://www.domain.tld/registrationPostcodeFallbackPath"

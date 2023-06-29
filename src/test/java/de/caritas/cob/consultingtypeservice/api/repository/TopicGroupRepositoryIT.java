@@ -43,8 +43,26 @@ class TopicGroupRepositoryIT {
   @Test
   void topicGroupRepositoryReturnsSomeMeaningfulData() {
     val now = LocalDateTime.now();
-    val te1 = TopicEntity.builder().name("te1").createDate(now).updateDate(now).build();
-    val te2 = TopicEntity.builder().name("te2").createDate(now).updateDate(now).build();
+    val te1 =
+        TopicEntity.builder()
+            .name("te1")
+            .createDate(now)
+            .updateDate(now)
+            .titlesDropdown("td")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesWelcome("tw")
+            .build();
+    val te2 =
+        TopicEntity.builder()
+            .name("te2")
+            .createDate(now)
+            .updateDate(now)
+            .titlesDropdown("td")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesWelcome("tw")
+            .build();
 
     topicRepository.saveAllAndFlush(List.of(te1, te2));
 
@@ -76,10 +94,46 @@ class TopicGroupRepositoryIT {
   void deletingTopicGroupKeepsTopicsUntouched() {
     /* given */
     val now = LocalDateTime.now();
-    val te1 = TopicEntity.builder().name("te1").createDate(now).updateDate(now).build();
-    val te2 = TopicEntity.builder().name("te2").createDate(now).updateDate(now).build();
-    val te3 = TopicEntity.builder().name("te3").createDate(now).updateDate(now).build();
-    val te4 = TopicEntity.builder().name("te4").createDate(now).updateDate(now).build();
+    val te1 =
+        TopicEntity.builder()
+            .name("te1")
+            .createDate(now)
+            .updateDate(now)
+            .titlesDropdown("td")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesWelcome("tw")
+            .build();
+    val te2 =
+        TopicEntity.builder()
+            .name("te2")
+            .createDate(now)
+            .updateDate(now)
+            .titlesDropdown("td")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesWelcome("tw")
+            .build();
+    val te3 =
+        TopicEntity.builder()
+            .name("te3")
+            .createDate(now)
+            .updateDate(now)
+            .titlesDropdown("td")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesWelcome("tw")
+            .build();
+    val te4 =
+        TopicEntity.builder()
+            .name("te4")
+            .createDate(now)
+            .updateDate(now)
+            .titlesDropdown("td")
+            .titlesShort("ts")
+            .titlesLong("tl")
+            .titlesWelcome("tw")
+            .build();
 
     topicRepository.saveAllAndFlush(List.of(te1, te2, te3, te4));
 
@@ -123,8 +177,26 @@ class TopicGroupRepositoryIT {
   void deletingTopicGetsItRemovedFromGroup() {
     /* given */
     val now = LocalDateTime.now();
-    val te1 = TopicEntity.builder().name("te1").createDate(now).updateDate(now).build();
-    val te2 = TopicEntity.builder().name("te2").createDate(now).updateDate(now).build();
+    val te1 =
+        TopicEntity.builder()
+            .name("te1")
+            .createDate(now)
+            .updateDate(now)
+            .titlesLong("long")
+            .titlesShort("short")
+            .titlesWelcome("welcome")
+            .titlesDropdown("dropdown")
+            .build();
+    val te2 =
+        TopicEntity.builder()
+            .name("te2")
+            .createDate(now)
+            .updateDate(now)
+            .titlesLong("long")
+            .titlesShort("short")
+            .titlesWelcome("welcome")
+            .titlesDropdown("dropdown")
+            .build();
 
     topicRepository.saveAllAndFlush(List.of(te1, te2));
 

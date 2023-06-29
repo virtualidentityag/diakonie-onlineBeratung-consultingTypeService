@@ -453,39 +453,6 @@
         "notes"
       ]
     },
-    "titles": {
-      "description": "Titles for this consulting type, which are displayed to the user",
-      "type": "object",
-      "properties": {
-        "default": {
-          "description": "Title which is displayed in list items",
-          "type": "string"
-        },
-        "short": {
-          "description": "Title which is displayed in the session header",
-          "type": "string"
-        },
-        "long": {
-          "description": "Title which is displayed as overline and as title of the registration form",
-          "type": "string"
-        },
-        "welcome": {
-          "description": "Welcome message which is displayed on the pre-registration page",
-          "type": "string"
-        },
-        "registrationDropdown": {
-          "description": "Alternative title for the display of the topic for the registration dropdown in the advice seeker profile",
-          "type": ["string", "null"],
-          "default": null
-        }
-      },
-      "required": [
-        "default",
-        "short",
-        "long",
-        "welcome"
-      ]
-    },
     "urls": {
       "description": "Forwarding urls",
       "type": "object",
@@ -609,7 +576,6 @@
     "slug",
     "roles",
     "registration",
-    "titles",
     "urls"
   ]
 }

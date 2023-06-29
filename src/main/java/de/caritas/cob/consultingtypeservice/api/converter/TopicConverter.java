@@ -3,10 +3,7 @@ package de.caritas.cob.consultingtypeservice.api.converter;
 import static de.caritas.cob.consultingtypeservice.api.util.JsonConverter.convertMapFromJson;
 import static de.caritas.cob.consultingtypeservice.api.util.JsonConverter.convertToJson;
 
-import de.caritas.cob.consultingtypeservice.api.model.TopicDTO;
-import de.caritas.cob.consultingtypeservice.api.model.TopicEntity;
-import de.caritas.cob.consultingtypeservice.api.model.TopicMultilingualDTO;
-import de.caritas.cob.consultingtypeservice.api.model.TopicStatus;
+import de.caritas.cob.consultingtypeservice.api.model.*;
 import de.caritas.cob.consultingtypeservice.api.service.TranslationService;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -38,6 +35,7 @@ public class TopicConverter {
             .fallbackAgencyId(topic.getFallbackAgencyId())
             .fallbackUrl(topic.getFallbackUrl())
             .welcomeMessage(topic.getWelcomeMessage())
+            .titles(toTitlesDTO(topic))
             .internalIdentifier(topic.getInternalIdentifier());
     if (topic.getCreateDate() != null) {
       topicDTO.setCreateDate(topic.getCreateDate().toString());
@@ -46,6 +44,14 @@ public class TopicConverter {
       topicDTO.setUpdateDate(topic.getUpdateDate().toString());
     }
     return topicDTO;
+  }
+
+  private static TitlesDTO toTitlesDTO(TopicEntity topic) {
+    return new TitlesDTO()
+        ._short(topic.getTitlesShort())
+        ._long(topic.getTitlesLong())
+        .welcome(topic.getTitlesWelcome())
+        .registrationDropdown(topic.getTitlesDropdown());
   }
 
   public TopicDTO toDTO(final TopicEntity topic) {
@@ -63,6 +69,7 @@ public class TopicConverter {
             .fallbackAgencyId(topic.getFallbackAgencyId())
             .fallbackUrl(topic.getFallbackUrl())
             .welcomeMessage(topic.getWelcomeMessage())
+            .titles(toTitlesDTO(topic))
             .internalIdentifier(topic.getInternalIdentifier());
     if (topic.getCreateDate() != null) {
       topicMultilingualDTO.setCreateDate(topic.getCreateDate().toString());
@@ -93,6 +100,10 @@ public class TopicConverter {
     topicEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     topicEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     topicEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
+    topicEntity.setTitlesShort(topicDTO.getTitles().getShort());
+    topicEntity.setTitlesLong(topicDTO.getTitles().getLong());
+    topicEntity.setTitlesWelcome(topicDTO.getTitles().getWelcome());
+    topicEntity.setTitlesDropdown(topicDTO.getTitles().getRegistrationDropdown());
     return topicEntity;
   }
 
@@ -105,6 +116,10 @@ public class TopicConverter {
     targetEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     targetEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     targetEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
+    targetEntity.setTitlesShort(topicDTO.getTitles().getShort());
+    targetEntity.setTitlesLong(topicDTO.getTitles().getLong());
+    targetEntity.setTitlesWelcome(topicDTO.getTitles().getWelcome());
+    targetEntity.setTitlesDropdown(topicDTO.getTitles().getRegistrationDropdown());
     return targetEntity;
   }
 

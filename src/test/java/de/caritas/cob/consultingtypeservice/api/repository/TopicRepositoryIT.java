@@ -57,6 +57,10 @@ class TopicRepositoryIT {
             .name(NEW_TOPIC_NAME)
             .description("desc")
             .createDate(LocalDateTime.now())
+            .titlesLong("long")
+            .titlesShort("short")
+            .titlesWelcome("welcome")
+            .titlesDropdown("dropdown")
             .build();
     var savedTopicEntity = topicRepository.save(topicEntity);
     // then
@@ -76,6 +80,10 @@ class TopicRepositoryIT {
               .description("desc")
               .createDate(LocalDateTime.now())
               .fallbackAgencyId(123)
+              .titlesLong("long")
+              .titlesShort("short")
+              .titlesWelcome("welcome")
+              .titlesDropdown("dropdown")
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then
@@ -93,6 +101,10 @@ class TopicRepositoryIT {
               .name(NEW_TOPIC_NAME)
               .description("desc")
               .createDate(LocalDateTime.now())
+              .titlesLong("long")
+              .titlesShort("short")
+              .titlesWelcome("welcome")
+              .titlesDropdown("dropdown")
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then
@@ -115,6 +127,10 @@ class TopicRepositoryIT {
               .description("desc")
               .createDate(LocalDateTime.now())
               .fallbackUrl(fallbackUrl)
+              .titlesLong("long")
+              .titlesShort("short")
+              .titlesWelcome("welcome")
+              .titlesDropdown("dropdown")
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then
@@ -132,6 +148,10 @@ class TopicRepositoryIT {
               .name(NEW_TOPIC_NAME)
               .description("desc")
               .createDate(LocalDateTime.now())
+              .titlesLong("long")
+              .titlesShort("short")
+              .titlesWelcome("welcome")
+              .titlesDropdown("dropdown")
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then
@@ -154,6 +174,10 @@ class TopicRepositoryIT {
               .description("desc")
               .createDate(LocalDateTime.now())
               .welcomeMessage(welcomeMessage)
+              .titlesShort("short")
+              .titlesDropdown("dropdown")
+              .titlesLong("long")
+              .titlesWelcome("welcome")
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then
@@ -171,6 +195,10 @@ class TopicRepositoryIT {
               .name(NEW_TOPIC_NAME)
               .description("desc")
               .createDate(LocalDateTime.now())
+              .titlesWelcome("welcome")
+              .titlesLong("long")
+              .titlesDropdown("dropdown")
+              .titlesShort("short")
               .build();
       var savedTopicEntity = topicRepository.save(topicEntity);
       // then

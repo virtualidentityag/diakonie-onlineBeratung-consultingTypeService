@@ -19,7 +19,6 @@ public class FullConsultingTypeMapper extends ConsultingTypeMapper {
         .description(consultingType.getDescription())
         .furtherInformation(mapFurtherInformation(consultingType.getFurtherInformation()))
         .slug(consultingType.getSlug())
-        .titles(mapTitles(consultingType.getTitles()))
         .urls(mapUrls(consultingType.getUrls()))
         .registration(mapRegistration(consultingType.getRegistration()))
         .excludeNonMainConsultantsFromTeamSessions(

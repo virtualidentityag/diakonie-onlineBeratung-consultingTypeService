@@ -35,8 +35,8 @@ class TopicGroupsServiceIT {
   void getAllTopicGroups_Should_returnAllTopicGroups() {
     // given, when
     val now = LocalDateTime.now();
-    val te1 = TopicEntity.builder().name("te1").createDate(now).updateDate(now).build();
-    val te2 = TopicEntity.builder().name("te2").createDate(now).updateDate(now).build();
+    val te1 = newTopicEntity("te1", now);
+    val te2 = newTopicEntity("te2", now);
 
     topicRepository.saveAllAndFlush(List.of(te1, te2));
 
@@ -53,5 +53,17 @@ class TopicGroupsServiceIT {
     val firstTopicGroupTopics = firstTopicGroup.getTopicEntities();
     assertThat(firstTopicGroupTopics).hasSize(2);
     assertThat(firstTopicGroupTopics).extracting("name").containsExactlyInAnyOrder("te1", "te2");
+  }
+
+  private static TopicEntity newTopicEntity(String te1, LocalDateTime now) {
+    return TopicEntity.builder()
+        .name(te1)
+        .createDate(now)
+        .updateDate(now)
+        .titlesDropdown("td")
+        .titlesWelcome("tw")
+        .titlesLong("tl")
+        .titlesShort("ts")
+        .build();
   }
 }
