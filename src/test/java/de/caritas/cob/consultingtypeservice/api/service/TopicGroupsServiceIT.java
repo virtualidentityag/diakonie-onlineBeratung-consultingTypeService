@@ -62,7 +62,6 @@ class TopicGroupsServiceIT {
         .updateDate(now)
         .titlesDropdown("td")
         .titlesWelcome("tw")
-        .titlesDefault("td")
         .titlesLong("tl")
         .titlesShort("ts")
         .build();

@@ -52,7 +52,6 @@ class TopicGroupRepositoryIT {
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesWelcome("tw")
-            .titlesDefault("td")
             .build();
     val te2 =
         TopicEntity.builder()
@@ -63,7 +62,6 @@ class TopicGroupRepositoryIT {
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesWelcome("tw")
-            .titlesDefault("td")
             .build();
 
     topicRepository.saveAllAndFlush(List.of(te1, te2));
@@ -105,7 +103,6 @@ class TopicGroupRepositoryIT {
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesWelcome("tw")
-            .titlesDefault("td")
             .build();
     val te2 =
         TopicEntity.builder()
@@ -116,7 +113,6 @@ class TopicGroupRepositoryIT {
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesWelcome("tw")
-            .titlesDefault("td")
             .build();
     val te3 =
         TopicEntity.builder()
@@ -127,7 +123,6 @@ class TopicGroupRepositoryIT {
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesWelcome("tw")
-            .titlesDefault("td")
             .build();
     val te4 =
         TopicEntity.builder()
@@ -138,7 +133,6 @@ class TopicGroupRepositoryIT {
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesWelcome("tw")
-            .titlesDefault("td")
             .build();
 
     topicRepository.saveAllAndFlush(List.of(te1, te2, te3, te4));
@@ -188,11 +182,9 @@ class TopicGroupRepositoryIT {
             .name("te1")
             .createDate(now)
             .updateDate(now)
-            .titlesDefault("default")
             .titlesLong("long")
             .titlesShort("short")
             .titlesWelcome("welcome")
-            .titlesDefault("default")
             .titlesDropdown("dropdown")
             .build();
     val te2 =
@@ -200,11 +192,9 @@ class TopicGroupRepositoryIT {
             .name("te2")
             .createDate(now)
             .updateDate(now)
-            .titlesDefault("default")
             .titlesLong("long")
             .titlesShort("short")
             .titlesWelcome("welcome")
-            .titlesDefault("default")
             .titlesDropdown("dropdown")
             .build();
 

@@ -106,12 +106,7 @@ class TopicAdminControllerIT {
             .withInternalIdentifier("new ident")
             .withStatus(TopicStatus.INACTIVE.toString())
             .withTitles(
-                new TitlesDTO()
-                    ._default("d")
-                    ._short("l")
-                    ._long("l")
-                    .welcome("l")
-                    .registrationDropdown("dd"))
+                new TitlesDTO()._short("l")._long("l").welcome("l").registrationDropdown("dd"))
             .jsonify();
 
     final Authentication authentication = givenMockAuthentication(UserRole.TOPIC_ADMIN);
@@ -211,7 +206,6 @@ class TopicAdminControllerIT {
     topicDTO.setStatus(TopicStatus.INACTIVE.toString());
     topicDTO.setTitles(
         new TitlesDTO()
-            ._default("default")
             ._short("short")
             ._long("long")
             .welcome("welcome")

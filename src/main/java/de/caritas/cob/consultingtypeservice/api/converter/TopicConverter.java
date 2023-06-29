@@ -48,7 +48,6 @@ public class TopicConverter {
 
   private static TitlesDTO toTitlesDTO(TopicEntity topic) {
     return new TitlesDTO()
-        ._default(topic.getTitlesDefault())
         ._short(topic.getTitlesShort())
         ._long(topic.getTitlesLong())
         .welcome(topic.getTitlesWelcome())
@@ -101,7 +100,6 @@ public class TopicConverter {
     topicEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     topicEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     topicEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
-    topicEntity.setTitlesDefault(topicDTO.getTitles().getDefault());
     topicEntity.setTitlesShort(topicDTO.getTitles().getShort());
     topicEntity.setTitlesLong(topicDTO.getTitles().getLong());
     topicEntity.setTitlesWelcome(topicDTO.getTitles().getWelcome());
@@ -118,7 +116,6 @@ public class TopicConverter {
     targetEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     targetEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     targetEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
-    targetEntity.setTitlesDefault(topicDTO.getTitles().getDefault());
     targetEntity.setTitlesShort(topicDTO.getTitles().getShort());
     targetEntity.setTitlesLong(topicDTO.getTitles().getLong());
     targetEntity.setTitlesWelcome(topicDTO.getTitles().getWelcome());

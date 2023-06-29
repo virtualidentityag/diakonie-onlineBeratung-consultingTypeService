@@ -217,9 +217,6 @@ components:
     TitlesDTO:
       type: object
       properties:
-        default:
-          type: string
-          example: "Beratung xyz"
         short:
           type: string
           example: "xyz"
