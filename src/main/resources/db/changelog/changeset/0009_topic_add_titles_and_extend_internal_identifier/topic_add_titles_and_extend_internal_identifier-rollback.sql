@@ -6,4 +6,4 @@ ALTER TABLE consultingtypeservice.`topic`
     DROP IF EXISTS slug;
 
 ALTER TABLE consultingtypeservice.`topic`
-ALTER COLUMN internal_identifier varchar(50);
+MODIFY COLUMN internal_identifier varchar(50);
