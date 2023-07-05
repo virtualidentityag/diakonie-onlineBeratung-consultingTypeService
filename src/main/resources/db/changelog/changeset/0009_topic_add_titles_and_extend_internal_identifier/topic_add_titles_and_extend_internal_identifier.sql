@@ -6,4 +6,4 @@ ALTER TABLE consultingtypeservice.`topic`
     ADD slug varchar(255) NULL;
 
 ALTER TABLE consultingtypeservice.`topic`
-ALTER COLUMN internal_identifier varchar(255);
+MODIFY COLUMN internal_identifier varchar(255);
