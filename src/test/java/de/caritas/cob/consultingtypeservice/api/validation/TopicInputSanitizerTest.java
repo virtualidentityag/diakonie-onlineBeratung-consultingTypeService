@@ -24,6 +24,7 @@ class TopicInputSanitizerTest {
             .withDescription("desc" + SCRIPT_MALICIOUS_CONTENT)
             .withInternalIdentifier(SCRIPT_MALICIOUS_CONTENT + "internalIdent")
             .withStatus(TopicStatus.ACTIVE.toString())
+            .withSlug("slug")
             .build();
     // when
     final TopicMultilingualDTO sanitized = topicInputSanitizer.sanitize(topicMultilingualDTO);
@@ -33,5 +34,6 @@ class TopicInputSanitizerTest {
     assertThat(sanitized.getDescription().get("de"), is("desc"));
     assertThat(sanitized.getInternalIdentifier(), is("internalIdent"));
     assertThat(sanitized.getStatus(), is(TopicStatus.ACTIVE.toString()));
+    assertThat(sanitized.getSlug(), is("slug"));
   }
 }
