@@ -76,6 +76,7 @@ class TopicControllerIT {
         .andExpect(jsonPath("$", hasSize(greaterThan(1))))
         .andExpect(jsonPath("$[0].id").value(1))
         .andExpect(jsonPath("$[0].name").exists())
+        .andExpect(jsonPath("$[0].slug").exists())
         .andExpect(jsonPath("$[0].description").exists())
         .andExpect(jsonPath("$[0].status").exists())
         .andExpect(jsonPath("$[0].createDate").exists());
@@ -90,6 +91,7 @@ class TopicControllerIT {
         .andExpect(jsonPath("$", hasSize(2)))
         .andExpect(jsonPath("$[0].id").exists())
         .andExpect(jsonPath("$[0].name").exists())
+        .andExpect(jsonPath("$[0].slug").exists())
         .andExpect(jsonPath("$[0].description").exists())
         .andExpect(jsonPath("$[0].status").exists())
         .andExpect(jsonPath("$[0].createDate").exists());

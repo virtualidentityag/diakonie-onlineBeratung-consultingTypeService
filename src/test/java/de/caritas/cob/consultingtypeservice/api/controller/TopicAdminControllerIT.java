@@ -102,6 +102,7 @@ class TopicAdminControllerIT {
         new MultilingualTopicTestDataBuilder()
             .topicDTO()
             .withName("new name")
+            .withSlug("new_slug")
             .withDescription("new desc")
             .withInternalIdentifier("new ident")
             .withStatus(TopicStatus.INACTIVE.toString())
@@ -120,6 +121,7 @@ class TopicAdminControllerIT {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").exists())
         .andExpect(jsonPath("$.name['de']").value("new name"))
+        .andExpect(jsonPath("$.slug").value("new_slug"))
         .andExpect(jsonPath("$.description['de']").value("new desc"))
         .andExpect(jsonPath("$.internalIdentifier").value("new ident"))
         .andExpect(jsonPath("$.status").value(TopicStatus.INACTIVE.toString()))
@@ -134,6 +136,7 @@ class TopicAdminControllerIT {
         new MultilingualTopicTestDataBuilder()
             .topicDTO()
             .withName("new name")
+            .withName("new_slug")
             .withDescription("new desc")
             .withInternalIdentifier("new ident")
             .withStatus(TopicStatus.INACTIVE.toString())
@@ -204,6 +207,7 @@ class TopicAdminControllerIT {
     final EasyRandom easyRandom = new EasyRandom();
     final TopicMultilingualDTO topicDTO = easyRandom.nextObject(TopicMultilingualDTO.class);
     topicDTO.setStatus(TopicStatus.INACTIVE.toString());
+    topicDTO.setSlug("slug");
     topicDTO.setTitles(
         new TitlesDTO()
             ._short("short")
@@ -222,6 +226,7 @@ class TopicAdminControllerIT {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").exists())
         .andExpect(jsonPath("$.name").exists())
+        .andExpect(jsonPath("$.slug").exists())
         .andExpect(jsonPath("$.description").exists())
         .andExpect(jsonPath("$.status").value("INACTIVE"))
         .andExpect(jsonPath("$.internalIdentifier").exists())
@@ -266,6 +271,7 @@ class TopicAdminControllerIT {
         .andExpect(jsonPath("$", hasSize(greaterThan(1))))
         .andExpect(jsonPath("$[0].id").value(1))
         .andExpect(jsonPath("$[0].name").exists())
+        .andExpect(jsonPath("$[0].slug").exists())
         .andExpect(jsonPath("$[0].description").exists())
         .andExpect(jsonPath("$[0].status").exists())
         .andExpect(jsonPath("$[0].createDate").exists());
@@ -294,6 +300,7 @@ class TopicAdminControllerIT {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").value(1))
         .andExpect(jsonPath("$.name").exists())
+        .andExpect(jsonPath("$.slug").exists())
         .andExpect(jsonPath("$.description").exists())
         .andExpect(jsonPath("$.status").exists())
         .andExpect(jsonPath("$.createDate").exists());

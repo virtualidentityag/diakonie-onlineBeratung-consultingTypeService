@@ -46,6 +46,7 @@ class TopicGroupRepositoryIT {
     val te1 =
         TopicEntity.builder()
             .name("te1")
+            .slug("s1")
             .createDate(now)
             .updateDate(now)
             .titlesDropdown("td")
@@ -56,6 +57,7 @@ class TopicGroupRepositoryIT {
     val te2 =
         TopicEntity.builder()
             .name("te2")
+            .slug("s2")
             .createDate(now)
             .updateDate(now)
             .titlesDropdown("td")
@@ -97,6 +99,7 @@ class TopicGroupRepositoryIT {
     val te1 =
         TopicEntity.builder()
             .name("te1")
+            .slug("s1")
             .createDate(now)
             .updateDate(now)
             .titlesDropdown("td")
@@ -107,6 +110,7 @@ class TopicGroupRepositoryIT {
     val te2 =
         TopicEntity.builder()
             .name("te2")
+            .slug("s2")
             .createDate(now)
             .updateDate(now)
             .titlesDropdown("td")
@@ -117,6 +121,7 @@ class TopicGroupRepositoryIT {
     val te3 =
         TopicEntity.builder()
             .name("te3")
+            .slug("s3")
             .createDate(now)
             .updateDate(now)
             .titlesDropdown("td")
@@ -127,6 +132,7 @@ class TopicGroupRepositoryIT {
     val te4 =
         TopicEntity.builder()
             .name("te4")
+            .slug("s4")
             .createDate(now)
             .updateDate(now)
             .titlesDropdown("td")
@@ -180,6 +186,7 @@ class TopicGroupRepositoryIT {
     val te1 =
         TopicEntity.builder()
             .name("te1")
+            .slug("s1")
             .createDate(now)
             .updateDate(now)
             .titlesLong("long")
@@ -190,6 +197,7 @@ class TopicGroupRepositoryIT {
     val te2 =
         TopicEntity.builder()
             .name("te2")
+            .slug("s2")
             .createDate(now)
             .updateDate(now)
             .titlesLong("long")

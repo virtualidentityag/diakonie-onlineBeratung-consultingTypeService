@@ -34,6 +34,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name(name)
+            .slug("slug")
             .titles(
                 new TitlesDTO()._short("ts")._long("tl").registrationDropdown("td").welcome("tw"))
             .description(description);
@@ -44,6 +45,7 @@ class TopicConverterTest {
     // then
     final TopicDTO actual = topicConverter.toDTO(entity);
     assertThat(actual.getName()).isEqualTo(topicDTO.getName().get("de"));
+    assertThat(actual.getSlug()).isEqualTo(topicDTO.getSlug());
     assertThat(actual.getDescription()).isEqualTo(topicDTO.getDescription().get("de"));
   }
 
@@ -58,6 +60,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
+            .slug("slug")
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesDropdown("td")
@@ -70,6 +73,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
+            .slug("slug")
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesDropdown("td")
@@ -83,6 +87,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name("name en")
+            .slug("slug")
             .titles(titles)
             .description("desc en");
     final var topicDTO2 =
@@ -91,6 +96,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier 2")
             .name("name 2 en")
+            .slug("slug")
             .titles(titles)
             .description("desc 2 en");
 
@@ -113,6 +119,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
+            .slug("slug")
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesDropdown("td")
@@ -125,6 +132,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
+            .slug("slug")
             .titlesShort("ts")
             .titlesLong("tl")
             .titlesDropdown("td")
@@ -138,6 +146,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
             .name("name de")
+            .slug("slug")
             .titles(titles)
             .description("desc de");
     final var topicDTO2 =
@@ -146,6 +155,7 @@ class TopicConverterTest {
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier 2")
             .name("name 2 de")
+            .slug("slug")
             .titles(titles)
             .description("desc 2 de");
 
@@ -168,6 +178,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
+            .slug("slug")
             .titlesLong(titles.getLong())
             .titlesShort(titles.getShort())
             .titlesDropdown(titles.getRegistrationDropdown())
@@ -180,6 +191,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
+            .slug("slug")
             .titlesLong(titles.getLong())
             .titlesShort(titles.getShort())
             .titlesWelcome(titles.getWelcome())
@@ -205,6 +217,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier")
             .name(name1)
             .description(description1)
+            .slug("slug")
             .titles(titles);
     final var topicDTO2 =
         new TopicMultilingualDTO()
@@ -213,6 +226,7 @@ class TopicConverterTest {
             .internalIdentifier("identifier 2")
             .name(name2)
             .description(description2)
+            .slug("slug")
             .titles(titles);
 
     // when

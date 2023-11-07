@@ -280,6 +280,10 @@ components:
           type: string
           example: "Topic name"
           maxLength: 100
+        slug:
+          type: string
+          example: "topic_slug"
+          maxLength: 100
         description:
           type: string
           example: "Description"
@@ -318,6 +322,10 @@ components:
           type: object
           additionalProperties:
             type: string
+        slug:
+          type: string
+          example: "topic_slug"
+          maxLength: 100
         description:
           type: object
           additionalProperties:
