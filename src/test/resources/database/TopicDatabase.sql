@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `topic`
     `titles_long`            varchar(255) NOT NULL,
     `titles_welcome`         varchar(255) NOT NULL,
     `titles_dropdown`        varchar(255) NOT NULL,
+    `slug`                   varchar(255) NULL,
     PRIMARY KEY (`id`)
 );
 
@@ -36,22 +37,22 @@ CREATE SEQUENCE IF NOT EXISTS sequence_topic
 
 INSERT INTO TOPIC (`id`, `tenant_id`, `name`, `description`, `status`, `create_date`, `fallback_agency_id`,
                    `fallback_url`, `welcome_message`, `send_next_step_message`, `titles_short`,
-                   `titles_long`, `titles_welcome`, `titles_dropdown`)
+                   `titles_long`, `titles_welcome`, `titles_dropdown`,`slug`)
 VALUES (1, '1', '{"de" : "de an active topic", "en": "en an active topic"}',
         '{"de" : "de description", "en": "en description"}', 'ACTIVE',
         '2022-06-02', 1, 'https://www.google.com', 'Welcome', TRUE, '1-short',
-        '1-long', '1-welcome', '1-dropdown');
+        '1-long', '1-welcome', '1-dropdown','1-slug');
 
 INSERT INTO TOPIC (`id`, `tenant_id`, `name`, `description`, `status`, `create_date`, `titles_short`,
-                   `titles_long`, `titles_welcome`, `titles_dropdown`)
+                   `titles_long`, `titles_welcome`, `titles_dropdown`, `slug`)
 VALUES (2, '1', '{"de" : "de not an active topic", "en": "en not an active topic"}',
         '{"de" : "de description", "en": "en description"}', 'INACTIVE', '2022-06-02', '2-short', '2-long',
-        '2-welcome', '2-dropdown');
+        '2-welcome', '2-dropdown', '2-slug');
 
 INSERT INTO TOPIC (`id`, `tenant_id`, `name`, `description`, `status`, `create_date`, `titles_short`,
-                   `titles_long`, `titles_welcome`, `titles_dropdown`)
+                   `titles_long`, `titles_welcome`, `titles_dropdown`, `slug`)
 VALUES (3, '2', '{"de" : "de another topic"}', '{"de" : "de description"}', 'ACTIVE', '2022-06-02',
-        '3-short', '3-long', '3-welcome', '3-dropdown');
+        '3-short', '3-long', '3-welcome', '3-dropdown', '3-slug');
 
 CREATE TABLE IF NOT EXISTS topic_group
 (

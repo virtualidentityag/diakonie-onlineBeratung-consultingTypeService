@@ -77,6 +77,11 @@ public class MultilingualTopicTestDataBuilder {
     return this;
   }
 
+  public MultilingualTopicTestDataBuilder withSlug(final String slug) {
+    topicMultilingualDTO.setSlug(slug);
+    return this;
+  }
+
   public TopicMultilingualDTO build() {
     return topicMultilingualDTO;
   }

@@ -60,6 +60,7 @@ class TopicGroupsServiceIT {
         .name(te1)
         .createDate(now)
         .updateDate(now)
+        .slug("slug")
         .titlesDropdown("td")
         .titlesWelcome("tw")
         .titlesLong("tl")

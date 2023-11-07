@@ -77,4 +77,7 @@ public class TopicEntity implements TenantAware {
 
   @Column(name = "titles_dropdown")
   private String titlesDropdown;
+
+  @Column(name = "slug")
+  private String slug;
 }
