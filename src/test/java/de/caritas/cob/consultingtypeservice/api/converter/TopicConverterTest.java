@@ -1,5 +1,6 @@
 package de.caritas.cob.consultingtypeservice.api.converter;
 
+import static de.caritas.cob.consultingtypeservice.api.util.JsonConverter.convertToJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -24,20 +25,20 @@ class TopicConverterTest {
   @Test
   void toEntity_should_convertToEntityAndBackToMultilingualDTO() {
     // given
-    final Map<String, String> name = new HashMap<>();
-    name.put("de", "name");
-    final Map<String, String> description = new HashMap<>();
-    description.put("de", "desc");
     final var topicDTO =
         new TopicMultilingualDTO()
             .id(1L)
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
-            .name(name)
+            .name(translateableMapWithGermanEntryFor("name"))
             .slug("slug")
             .titles(
-                new TitlesDTO()._short("ts")._long("tl").registrationDropdown("td").welcome("tw"))
-            .description(description);
+                new TitlesMultilingualDTO()
+                    ._short(translateableMapWithGermanEntryFor("ts"))
+                    ._long(translateableMapWithGermanEntryFor("tl"))
+                    .registrationDropdown("td")
+                    .welcome("tw"))
+            .description(translateableMapWithGermanEntryFor("desc"));
 
     // when
     final var entity = topicConverter.toEntity(topicDTO);
@@ -47,6 +48,14 @@ class TopicConverterTest {
     assertThat(actual.getName()).isEqualTo(topicDTO.getName().get("de"));
     assertThat(actual.getSlug()).isEqualTo(topicDTO.getSlug());
     assertThat(actual.getDescription()).isEqualTo(topicDTO.getDescription().get("de"));
+    assertThat(actual.getTitles().getShort()).isEqualTo("ts");
+    assertThat(actual.getTitles().getLong()).isEqualTo("tl");
+  }
+
+  private static Map<String, String> translateableMapWithGermanEntryFor(String value) {
+    final Map<String, String> description = new HashMap<>();
+    description.put("de", value);
+    return description;
   }
 
   @Test
@@ -61,10 +70,10 @@ class TopicConverterTest {
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
             .slug("slug")
-            .titlesShort("ts")
-            .titlesLong("tl")
-            .titlesDropdown("td")
+            .titlesShort("{\"de\":\"ts\", \"en\":\"ts en\"}")
+            .titlesLong("{\"de\":\"tl\", \"en\":\"tl en\"}")
             .titlesWelcome("tw")
+            .titlesDropdown("td")
             .build();
     final var topicEntity2 =
         TopicEntity.builder()
@@ -74,8 +83,8 @@ class TopicConverterTest {
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
             .slug("slug")
-            .titlesShort("ts")
-            .titlesLong("tl")
+            .titlesShort("{\"de\":\"ts\", \"en\":\"ts en\"}")
+            .titlesLong("{\"de\":\"tl\", \"en\":\"tl en\"}")
             .titlesDropdown("td")
             .titlesWelcome("tw")
             .build();
@@ -86,20 +95,21 @@ class TopicConverterTest {
             .id(1L)
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier")
-            .name("name en")
+            .name("name de")
             .slug("slug")
             .titles(titles)
-            .description("desc en");
+            .description("desc de");
     final var topicDTO2 =
         new TopicDTO()
             .id(2L)
             .status(TopicStatus.ACTIVE.toString())
             .internalIdentifier("identifier 2")
-            .name("name 2 en")
+            .name("name 2 de")
             .slug("slug")
             .titles(titles)
-            .description("desc 2 en");
+            .description("desc 2 de");
 
+    when(translationService.getCurrentLanguageContext()).thenReturn("de");
     // when
     final var entities = topicConverter.toDTOList(List.of(topicEntity1, topicEntity2));
 
@@ -120,8 +130,8 @@ class TopicConverterTest {
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
             .slug("slug")
-            .titlesShort("ts")
-            .titlesLong("tl")
+            .titlesShort("{\"de\":\"ts\", \"en\":\"ts en\"}")
+            .titlesLong("{\"de\":\"tl\", \"en\":\"tl en\"}")
             .titlesDropdown("td")
             .titlesWelcome("tw")
             .build();
@@ -133,8 +143,8 @@ class TopicConverterTest {
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
             .slug("slug")
-            .titlesShort("ts")
-            .titlesLong("tl")
+            .titlesShort("{\"de\":\"ts\", \"en\":\"ts en\"}")
+            .titlesLong("{\"de\":\"tl\", \"en\":\"tl en\"}")
             .titlesDropdown("td")
             .titlesWelcome("tw")
             .build();
@@ -159,6 +169,7 @@ class TopicConverterTest {
             .titles(titles)
             .description("desc 2 de");
 
+    when(translationService.getCurrentLanguageContext()).thenReturn("de");
     // when
     final var entities = topicConverter.toDTOList(List.of(topicEntity1, topicEntity2));
 
@@ -170,7 +181,12 @@ class TopicConverterTest {
   void
       toMultilingualDTOList_Should_convertCollectionOfTopicEntitiesToListOfTopicMultilingualDTOs() {
     // given
-    val titles = new TitlesDTO()._long("l")._short("s").registrationDropdown("r").welcome("w");
+    val titles =
+        new TitlesMultilingualDTO()
+            ._long(translateableMapWithGermanEntryFor("l"))
+            ._short(translateableMapWithGermanEntryFor("s"))
+            .registrationDropdown("r")
+            .welcome("w");
     final var topicEntity1 =
         TopicEntity.builder()
             .id(1L)
@@ -179,8 +195,8 @@ class TopicConverterTest {
             .name("{\"de\":\"name de\", \"en\":\"name en\"}")
             .description("{\"de\":\"desc de\", \"en\":\"desc en\"}")
             .slug("slug")
-            .titlesLong(titles.getLong())
-            .titlesShort(titles.getShort())
+            .titlesLong(convertToJson(titles.getLong()))
+            .titlesShort(convertToJson(titles.getShort()))
             .titlesDropdown(titles.getRegistrationDropdown())
             .titlesWelcome(titles.getWelcome())
             .build();
@@ -192,8 +208,8 @@ class TopicConverterTest {
             .name("{\"de\":\"name 2 de\", \"en\":\"name 2 en\"}")
             .description("{\"de\":\"desc 2 de\", \"en\":\"desc 2 en\"}")
             .slug("slug")
-            .titlesLong(titles.getLong())
-            .titlesShort(titles.getShort())
+            .titlesLong(convertToJson(titles.getLong()))
+            .titlesShort(convertToJson(titles.getShort()))
             .titlesWelcome(titles.getWelcome())
             .titlesDropdown(titles.getRegistrationDropdown())
             .build();
