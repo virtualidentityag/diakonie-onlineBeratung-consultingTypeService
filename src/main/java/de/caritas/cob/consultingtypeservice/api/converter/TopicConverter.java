@@ -2,6 +2,7 @@ package de.caritas.cob.consultingtypeservice.api.converter;
 
 import static de.caritas.cob.consultingtypeservice.api.util.JsonConverter.convertMapFromJson;
 import static de.caritas.cob.consultingtypeservice.api.util.JsonConverter.convertToJson;
+import static de.caritas.cob.consultingtypeservice.api.util.TranslationUtils.getTranslatedStringFromMap;
 
 import de.caritas.cob.consultingtypeservice.api.model.*;
 import de.caritas.cob.consultingtypeservice.api.service.TranslationService;
@@ -9,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +23,6 @@ public class TopicConverter {
 
   private final @NonNull TranslationService translationService;
 
-  public static final String DE = "de";
-
   public TopicDTO toDTO(final TopicEntity topic, final String lang) {
     final var topicDTO =
         new TopicDTO()
@@ -36,7 +34,7 @@ public class TopicConverter {
             .fallbackAgencyId(topic.getFallbackAgencyId())
             .fallbackUrl(topic.getFallbackUrl())
             .welcomeMessage(topic.getWelcomeMessage())
-            .titles(toTitlesDTO(topic))
+            .titles(toTitlesDTO(topic, lang))
             .internalIdentifier(topic.getInternalIdentifier());
     if (topic.getCreateDate() != null) {
       topicDTO.setCreateDate(topic.getCreateDate().toString());
@@ -47,10 +45,10 @@ public class TopicConverter {
     return topicDTO;
   }
 
-  private static TitlesDTO toTitlesDTO(TopicEntity topic) {
+  private static TitlesDTO toTitlesDTO(TopicEntity topic, String lang) {
     return new TitlesDTO()
-        ._short(topic.getTitlesShort())
-        ._long(topic.getTitlesLong())
+        ._short(getTranslatedStringFromMap(topic.getTitlesShort(), lang))
+        ._long(getTranslatedStringFromMap(topic.getTitlesLong(), lang))
         .welcome(topic.getTitlesWelcome())
         .registrationDropdown(topic.getTitlesDropdown());
   }
@@ -71,7 +69,7 @@ public class TopicConverter {
             .fallbackAgencyId(topic.getFallbackAgencyId())
             .fallbackUrl(topic.getFallbackUrl())
             .welcomeMessage(topic.getWelcomeMessage())
-            .titles(toTitlesDTO(topic))
+            .titles(toMultilingualTitlesDTO(topic))
             .internalIdentifier(topic.getInternalIdentifier());
     if (topic.getCreateDate() != null) {
       topicMultilingualDTO.setCreateDate(topic.getCreateDate().toString());
@@ -80,6 +78,14 @@ public class TopicConverter {
       topicMultilingualDTO.setUpdateDate(topic.getUpdateDate().toString());
     }
     return topicMultilingualDTO;
+  }
+
+  private TitlesMultilingualDTO toMultilingualTitlesDTO(TopicEntity topic) {
+    return new TitlesMultilingualDTO()
+        ._short(convertMapFromJson(topic.getTitlesShort()))
+        ._long(convertMapFromJson(topic.getTitlesLong()))
+        .welcome(topic.getTitlesWelcome())
+        .registrationDropdown(topic.getTitlesDropdown());
   }
 
   public List<TopicMultilingualDTO> toMultilingualDTOList(
@@ -103,11 +109,27 @@ public class TopicConverter {
     topicEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     topicEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     topicEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
-    topicEntity.setTitlesShort(topicDTO.getTitles().getShort());
-    topicEntity.setTitlesLong(topicDTO.getTitles().getLong());
-    topicEntity.setTitlesWelcome(topicDTO.getTitles().getWelcome());
-    topicEntity.setTitlesDropdown(topicDTO.getTitles().getRegistrationDropdown());
+    titlesToEntity(topicDTO, topicEntity);
     return topicEntity;
+  }
+
+  private void titlesToEntity(TopicMultilingualDTO topicDTO, TopicEntity topicEntity) {
+    TitlesMultilingualDTO titles = topicDTO.getTitles();
+    if (titles != null) {
+      topicEntity.setTitlesShort(convertToJson(titles.getShort()));
+      topicEntity.setTitlesLong(convertToJson(titles.getLong()));
+      topicEntity.setTitlesWelcome(convertToJson(titles.getWelcome()));
+      topicEntity.setTitlesDropdown(convertToJson(titles.getRegistrationDropdown()));
+    } else {
+      nullifyTitleAttributes(topicEntity);
+    }
+  }
+
+  private void nullifyTitleAttributes(TopicEntity topicEntity) {
+    topicEntity.setTitlesLong(null);
+    topicEntity.setTitlesShort(null);
+    topicEntity.setTitlesWelcome(null);
+    topicEntity.setTitlesDropdown(null);
   }
 
   public TopicEntity toEntity(final TopicEntity targetEntity, final TopicMultilingualDTO topicDTO) {
@@ -120,24 +142,7 @@ public class TopicConverter {
     targetEntity.setFallbackAgencyId(topicDTO.getFallbackAgencyId());
     targetEntity.setFallbackUrl(topicDTO.getFallbackUrl());
     targetEntity.setWelcomeMessage(topicDTO.getWelcomeMessage());
-    targetEntity.setTitlesShort(topicDTO.getTitles().getShort());
-    targetEntity.setTitlesLong(topicDTO.getTitles().getLong());
-    targetEntity.setTitlesWelcome(topicDTO.getTitles().getWelcome());
-    targetEntity.setTitlesDropdown(topicDTO.getTitles().getRegistrationDropdown());
+    titlesToEntity(topicDTO, targetEntity);
     return targetEntity;
-  }
-
-  private static String getTranslatedStringFromMap(final String jsonValue, final String lang) {
-    final Map<String, String> translations = convertMapFromJson(jsonValue);
-    if (lang == null || !translations.containsKey(lang)) {
-      if (translations.containsKey(DE)) {
-        return translations.get(DE);
-      } else {
-        log.warn("Default translation for value not available");
-        return "";
-      }
-    } else {
-      return translations.get(lang);
-    }
   }
 }

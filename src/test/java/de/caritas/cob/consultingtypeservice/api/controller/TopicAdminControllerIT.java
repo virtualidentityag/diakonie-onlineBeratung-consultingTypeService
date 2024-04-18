@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import de.caritas.cob.consultingtypeservice.ConsultingTypeServiceApplication;
 import de.caritas.cob.consultingtypeservice.api.auth.UserRole;
-import de.caritas.cob.consultingtypeservice.api.model.TitlesDTO;
+import de.caritas.cob.consultingtypeservice.api.model.TitlesMultilingualDTO;
 import de.caritas.cob.consultingtypeservice.api.model.TopicMultilingualDTO;
 import de.caritas.cob.consultingtypeservice.api.model.TopicStatus;
 import de.caritas.cob.consultingtypeservice.api.service.TenantService;
@@ -26,6 +26,7 @@ import de.caritas.cob.consultingtypeservice.api.util.MultilingualTopicTestDataBu
 import de.caritas.cob.consultingtypeservice.tenantservice.generated.web.model.RestrictedTenantDTO;
 import de.caritas.cob.consultingtypeservice.tenantservice.generated.web.model.Settings;
 import de.caritas.cob.consultingtypeservice.testHelper.TopicPathConstants;
+import java.util.HashMap;
 import java.util.Map;
 import org.assertj.core.util.Maps;
 import org.assertj.core.util.Sets;
@@ -107,7 +108,11 @@ class TopicAdminControllerIT {
             .withInternalIdentifier("new ident")
             .withStatus(TopicStatus.INACTIVE.toString())
             .withTitles(
-                new TitlesDTO()._short("l")._long("l").welcome("l").registrationDropdown("dd"))
+                new TitlesMultilingualDTO()
+                    ._short(translateableMapWithGermanEntryFor("l"))
+                    ._long(translateableMapWithGermanEntryFor("l"))
+                    .welcome("l")
+                    .registrationDropdown("dd"))
             .jsonify();
 
     final Authentication authentication = givenMockAuthentication(UserRole.TOPIC_ADMIN);
@@ -209,9 +214,9 @@ class TopicAdminControllerIT {
     topicDTO.setStatus(TopicStatus.INACTIVE.toString());
     topicDTO.setSlug("slug");
     topicDTO.setTitles(
-        new TitlesDTO()
-            ._short("short")
-            ._long("long")
+        new TitlesMultilingualDTO()
+            ._short(translateableMapWithGermanEntryFor("short"))
+            ._long(translateableMapWithGermanEntryFor("long"))
             .welcome("welcome")
             .registrationDropdown("dd"));
     final String payload = JsonConverter.convertToJson(topicDTO);
@@ -228,6 +233,8 @@ class TopicAdminControllerIT {
         .andExpect(jsonPath("$.name").exists())
         .andExpect(jsonPath("$.slug").exists())
         .andExpect(jsonPath("$.description").exists())
+        .andExpect(jsonPath("$.titles.short").exists())
+        .andExpect(jsonPath("$.titles.long").exists())
         .andExpect(jsonPath("$.status").value("INACTIVE"))
         .andExpect(jsonPath("$.internalIdentifier").exists())
         .andExpect(jsonPath("$.createDate").exists());
@@ -332,5 +339,11 @@ class TopicAdminControllerIT {
     final Map<String, Object> claimMap = Maps.newHashMap("username", "test");
     claimMap.put("userId", "some userid");
     when(token.getOtherClaims()).thenReturn(claimMap);
+  }
+
+  private static Map<String, String> translateableMapWithGermanEntryFor(String value) {
+    final Map<String, String> description = new HashMap<>();
+    description.put("de", value);
+    return description;
   }
 }

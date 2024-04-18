@@ -40,19 +40,19 @@ INSERT INTO TOPIC (`id`, `tenant_id`, `name`, `description`, `status`, `create_d
                    `titles_long`, `titles_welcome`, `titles_dropdown`,`slug`)
 VALUES (1, '1', '{"de" : "de an active topic", "en": "en an active topic"}',
         '{"de" : "de description", "en": "en description"}', 'ACTIVE',
-        '2022-06-02', 1, 'https://www.google.com', 'Welcome', TRUE, '1-short',
-        '1-long', '1-welcome', '1-dropdown','1-slug');
+        '2022-06-02', 1, 'https://www.google.com', 'Welcome', TRUE, '{"de" : "1-short", "en": "1-short-en"}',
+        '{"de" : "1-long", "en": "1-long-en"}', '1-welcome', '1-dropdown','1-slug');
 
 INSERT INTO TOPIC (`id`, `tenant_id`, `name`, `description`, `status`, `create_date`, `titles_short`,
                    `titles_long`, `titles_welcome`, `titles_dropdown`, `slug`)
 VALUES (2, '1', '{"de" : "de not an active topic", "en": "en not an active topic"}',
-        '{"de" : "de description", "en": "en description"}', 'INACTIVE', '2022-06-02', '2-short', '2-long',
+        '{"de" : "de description", "en": "en description"}', 'INACTIVE', '2022-06-02', '{"de" : "2-short", "en": "2-short-en"}', '{"de" : "2-short", "en": "2-long-en"}',
         '2-welcome', '2-dropdown', '2-slug');
 
 INSERT INTO TOPIC (`id`, `tenant_id`, `name`, `description`, `status`, `create_date`, `titles_short`,
                    `titles_long`, `titles_welcome`, `titles_dropdown`, `slug`)
 VALUES (3, '2', '{"de" : "de another topic"}', '{"de" : "de description"}', 'ACTIVE', '2022-06-02',
-        '3-short', '3-long', '3-welcome', '3-dropdown', '3-slug');
+        '{"de" : "3-short", "en": "3-short-en"}', '{"de" : "3-long", "en": "3-long-en"}', '3-welcome', '3-dropdown', '3-slug');
 
 CREATE TABLE IF NOT EXISTS topic_group
 (

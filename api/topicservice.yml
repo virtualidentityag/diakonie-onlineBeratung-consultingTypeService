@@ -229,6 +229,24 @@ components:
         registrationDropdown:
           type: string
           example: "Beratung xyz"
+    TitlesMultilingualDTO:
+      type: object
+      properties:
+        short:
+          type: object
+          additionalProperties:
+            type: string
+        long:
+          type: object
+          additionalProperties:
+            type: string
+        welcome:
+          type: string
+          example: "Herzlich Willkommen zu Beratung xyz"
+        registrationDropdown:
+          type: string
+          example: "Beratung xyz"
+
     TopicGroupsDTO:
       type: object
       required:
@@ -349,7 +367,7 @@ components:
         welcomeMessage:
           $ref: '#/components/schemas/WelcomeMessage'
         titles:
-          $ref: '#/components/schemas/TitlesDTO'
+          $ref: '#/components/schemas/TitlesMultilingualDTO'
 
     Translation:
       type: object
