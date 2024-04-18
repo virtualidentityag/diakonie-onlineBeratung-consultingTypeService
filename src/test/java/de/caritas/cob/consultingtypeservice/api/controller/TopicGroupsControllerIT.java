@@ -53,14 +53,14 @@ class TopicGroupsControllerIT {
     val tge1 =
         TopicGroupEntity.builder()
             .id(1L)
-            .name("1")
+            .name("{\"de\":\"1\"}")
             .topicEntities(
                 Set.of(TopicEntity.builder().id(1L).build(), TopicEntity.builder().id(2L).build()))
             .build();
     val tge2 =
         TopicGroupEntity.builder()
             .id(2L)
-            .name("2")
+            .name("{\"de\":\"2\"}")
             .topicEntities(
                 Set.of(TopicEntity.builder().id(3L).build(), TopicEntity.builder().id(4L).build()))
             .build();
