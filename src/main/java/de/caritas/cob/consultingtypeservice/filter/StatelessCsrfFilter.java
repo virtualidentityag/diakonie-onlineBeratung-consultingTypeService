@@ -3,7 +3,7 @@ package de.caritas.cob.consultingtypeservice.filter;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
-import de.caritas.cob.consultingtypeservice.config.SpringFoxConfig;
+import de.caritas.cob.consultingtypeservice.config.SecurityConfig;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +73,7 @@ public class StatelessCsrfFilter extends OncePerRequestFilter {
     public boolean matches(HttpServletRequest request) {
 
       // Allow specific whitelist items to disable CSRF protection for Swagger UI documentation
-      List<String> csrfWhitelist = new ArrayList<>(Arrays.asList(SpringFoxConfig.WHITE_LIST));
+      List<String> csrfWhitelist = new ArrayList<>(Arrays.asList(SecurityConfig.WHITE_LIST));
       csrfWhitelist.add("/topic");
       if (csrfWhitelist.parallelStream()
           .anyMatch(request.getRequestURI().toLowerCase()::contains)) {

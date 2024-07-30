@@ -6,15 +6,15 @@ DROP SEQUENCE IF EXISTS sequence_topic_group;
 
 CREATE TABLE IF NOT EXISTS `topic`
 (
-    `id`                     bigint(21)   NOT NULL,
-    `tenant_id`              bigint(21)   NULL,
+    `id`                     bigint   NOT NULL,
+    `tenant_id`              bigint   NULL,
     `name`                   varchar(100) NOT NULL,
     `description`            varchar(100) NULL,
     `status`                 varchar(20),
     `create_date`            datetime     NOT NULL,
     `update_date`            datetime     NULL,
     `internal_identifier`    varchar(50)  NULL,
-    `fallback_agency_id`     bigint(21)   NULL,
+    `fallback_agency_id`     bigint   NULL,
     `fallback_url`           varchar(200) NULL,
     `welcome_message`        varchar(200) NULL,
     `send_next_step_message` boolean DEFAULT FALSE,
@@ -56,10 +56,10 @@ VALUES (3, '2', '{"de" : "de another topic"}', '{"de" : "de description"}', 'ACT
 
 CREATE TABLE IF NOT EXISTS topic_group
 (
-    `id`          bigint(21)   NOT NULL,
+    `id`          bigint   NOT NULL,
     `name`        varchar(100) NOT NULL,
     `create_date` datetime     NOT NULL,
-    `tenant_id`   bigint(21)   NULL,
+    `tenant_id`   bigint   NULL,
     `update_date` datetime     NOT NULL,
     PRIMARY KEY (`id`)
 );
@@ -70,8 +70,8 @@ CREATE SEQUENCE sequence_topic_group
 
 CREATE TABLE IF NOT EXISTS topic_group_x_topic
 (
-    group_id bigint(21) NOT NULL,
-    topic_id bigint(21) NOT NULL,
+    group_id bigint NOT NULL,
+    topic_id bigint NOT NULL,
     foreign key (group_id) references topic_group (id) ON UPDATE CASCADE ON DELETE CASCADE,
     foreign key (topic_id) references topic (id) ON UPDATE CASCADE ON DELETE CASCADE
 );

@@ -1,5 +1,7 @@
 package de.caritas.cob.consultingtypeservice.api.controller;
 
+import static de.caritas.cob.consultingtypeservice.api.auth.Authority.AuthorityValue.CREATE_CONSULTING_TYPE;
+import static de.caritas.cob.consultingtypeservice.api.auth.Authority.AuthorityValue.LIMITED_PATCH_CONSULTING_TYPE;
 import static de.caritas.cob.consultingtypeservice.testHelper.PathConstants.PATH_GET_BASIC_CONSULTING_TYPE_BY_ID;
 import static de.caritas.cob.consultingtypeservice.testHelper.PathConstants.PATH_GET_BASIC_CONSULTING_TYPE_LIST;
 import static de.caritas.cob.consultingtypeservice.testHelper.PathConstants.PATH_GET_CONSULTING_TYPE_GROUPS;
@@ -16,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import de.caritas.cob.consultingtypeservice.api.auth.RoleAuthorizationAuthorityMapper;
 import de.caritas.cob.consultingtypeservice.api.consultingtypes.ConsultingTypeConverter;
 import de.caritas.cob.consultingtypeservice.api.exception.UnexpectedErrorException;
 import de.caritas.cob.consultingtypeservice.api.exception.httpresponses.NotFoundException;
@@ -34,32 +37,48 @@ import java.util.Collections;
 import org.apache.commons.lang3.StringUtils;
 import org.jeasy.random.EasyRandom;
 import org.json.JSONObject;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(ConsultingTypeController.class)
-@AutoConfigureMockMvc(addFilters = false)
-public class ConsultingTypeControllerIT {
+@SpringBootTest
+@AutoConfigureMockMvc
+@TestPropertySource(properties = "spring.profiles.active=testing")
+class ConsultingTypeControllerIT {
 
   private static final ObjectMapper objectMapper = new ObjectMapper();
-  @Autowired private MockMvc mvc;
+
+  private MockMvc mvc;
+
+  @Autowired private WebApplicationContext context;
+
+  @Autowired private RoleAuthorizationAuthorityMapper roleAuthorizationAuthorityMapper;
+
   @MockBean private ConsultingTypeService consultingTypeService;
+
   @MockBean private ConsultingTypeGroupService consultingTypeGroupService;
   @MockBean private LinkDiscoverers linkDiscoverers;
   @MockBean private TenantResolver tenantResolver;
+
+  @BeforeEach
+  public void setup() {
+    mvc = MockMvcBuilders.webAppContextSetup(context).build();
+  }
+
   private final ConsultingTypeConverter consultingTypeConverter = new ConsultingTypeConverter();
 
   @Test
-  public void getBasicConsultingTypeList_Should_ReturnNoContent_When_ServiceReturnsEmptyList()
+  void getBasicConsultingTypeList_Should_ReturnNoContent_When_ServiceReturnsEmptyList()
       throws Exception {
 
     when(consultingTypeService.fetchBasicConsultingTypesList()).thenReturn(null);
@@ -69,7 +88,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getBasicConsultingTypeList_Should_ReturnConsultingTypeBasicList() throws Exception {
+  void getBasicConsultingTypeList_Should_ReturnConsultingTypeBasicList() throws Exception {
 
     BasicConsultingTypeResponseDTO basicConsultingTypeResponseDTO =
         BasicConsultingTypeMapper.mapConsultingType(HelperMethods.getConsultingType());
@@ -88,7 +107,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getFullConsultingTypeById_Should_ReturnFullConsultingTypeDTO() throws Exception {
+  void getFullConsultingTypeById_Should_ReturnFullConsultingTypeDTO() throws Exception {
 
     Integer consultingTypeId = 1;
     when(consultingTypeService.fetchFullConsultingTypeSettingsById(consultingTypeId))
@@ -105,7 +124,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getFullConsultingTypeById_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
+  void getFullConsultingTypeById_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
       throws Exception {
 
     Integer consultingTypeId = 1;
@@ -120,7 +139,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getFullConsultingTypeBySlug_Should_ReturnFullConsultingTypeDTO() throws Exception {
+  void getFullConsultingTypeBySlug_Should_ReturnFullConsultingTypeDTO() throws Exception {
 
     String consultingTypeSlug = "consultingtype0";
     when(consultingTypeService.fetchFullConsultingTypeSettingsBySlug(consultingTypeSlug))
@@ -137,7 +156,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getFullConsultingTypeBySlug_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
+  void getFullConsultingTypeBySlug_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
       throws Exception {
 
     String consultingTypeSlug = "consultingtype0";
@@ -152,7 +171,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getExtendedConsultingTypeById_Should_ReturnFullConsultingTypeDTO() throws Exception {
+  void getExtendedConsultingTypeById_Should_ReturnFullConsultingTypeDTO() throws Exception {
 
     Integer consultingTypeId = 1;
     ExtendedConsultingTypeResponseDTO extendedConsultingTypeResponseDTO =
@@ -171,7 +190,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getExtendedConsultingTypeId_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
+  void getExtendedConsultingTypeId_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
       throws Exception {
 
     Integer consultingTypeId = 1;
@@ -186,7 +205,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getBasicConsultingTypeById_Should_ReturnBasicConsultingTypeDTO() throws Exception {
+  void getBasicConsultingTypeById_Should_ReturnBasicConsultingTypeDTO() throws Exception {
 
     Integer consultingTypeId = 1;
     BasicConsultingTypeResponseDTO basicConsultingTypeResponseDTO =
@@ -204,7 +223,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getBasicConsultingTypeById_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
+  void getBasicConsultingTypeById_Should_ReturnNotFound_WhenConsultingTypeIsMissing()
       throws Exception {
 
     Integer consultingTypeId = 1;
@@ -219,8 +238,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getConsultingTypeGroups_Should_ReturnNoContent_WhenNoGroupsDefined()
-      throws Exception {
+  void getConsultingTypeGroups_Should_ReturnNoContent_WhenNoGroupsDefined() throws Exception {
 
     when(consultingTypeGroupService.fetchConsultingTypeGroupList())
         .thenReturn(Collections.emptyList());
@@ -230,7 +248,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getConsultingTypeGroups_Should_ReturnListOfConsultingTypeGroupResponseDTO()
+  void getConsultingTypeGroups_Should_ReturnListOfConsultingTypeGroupResponseDTO()
       throws Exception {
 
     var consultingTypeGroupsReponseJson =
@@ -245,7 +263,7 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void getConsultingTypeGroups_Should_ReturnInternalServerError_WhenUnexpectedErrorOccurs()
+  void getConsultingTypeGroups_Should_ReturnInternalServerError_WhenUnexpectedErrorOccurs()
       throws Exception {
 
     when(consultingTypeGroupService.fetchConsultingTypeGroupList())
@@ -256,7 +274,8 @@ public class ConsultingTypeControllerIT {
   }
 
   @Test
-  public void createConsultingType_Should_returnOk_When_requiredConsultingTypeDTOIsGiven()
+  @WithMockUser(authorities = CREATE_CONSULTING_TYPE)
+  void createConsultingType_Should_returnOk_When_requiredConsultingTypeDTOIsGiven()
       throws Exception {
     // given
     ConsultingTypeDTO consultingTypeDTO =
@@ -273,6 +292,26 @@ public class ConsultingTypeControllerIT {
         .andExpect(status().isOk());
 
     verify(consultingTypeService).createConsultingType(consultingTypeDTO);
+  }
+
+  @Test
+  @WithMockUser(authorities = LIMITED_PATCH_CONSULTING_TYPE)
+  void
+      createConsultingType_Should_returnForbidden_When_AttemptToCreateConsultingTypeWithoutPermissions()
+          throws Exception {
+    // given
+    ConsultingTypeDTO consultingTypeDTO =
+        new EasyRandom().nextObject(ConsultingTypeDTO.class).roles(null);
+
+    objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+    // when
+    this.mvc
+        .perform(
+            post(ROOT_PATH)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(consultingTypeDTO)))
+        // then
+        .andExpect(status().isForbidden());
   }
 
   private String removeGroupsNode(String consultingTypeSettingsAsJsonString) {
