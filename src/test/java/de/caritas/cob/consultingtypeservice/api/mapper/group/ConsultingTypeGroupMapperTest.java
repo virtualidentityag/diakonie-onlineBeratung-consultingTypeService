@@ -9,7 +9,7 @@ import de.caritas.cob.consultingtypeservice.testHelper.HelperMethods;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ConsultingTypeGroupMapperTest {
 

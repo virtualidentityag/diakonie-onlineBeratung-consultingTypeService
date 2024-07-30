@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import de.caritas.cob.consultingtypeservice.api.model.HalLink.MethodEnum;
 import de.caritas.cob.consultingtypeservice.api.model.RootDTO;
 import de.caritas.cob.consultingtypeservice.api.model.RootLinks;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RootDTOBuilderTest {
 

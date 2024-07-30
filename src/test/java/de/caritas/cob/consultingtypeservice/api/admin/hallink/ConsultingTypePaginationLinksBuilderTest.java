@@ -12,7 +12,7 @@ import de.caritas.cob.consultingtypeservice.api.model.PaginationLinks;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.jeasy.random.EasyRandom;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.support.PagedListHolder;
 
 public class ConsultingTypePaginationLinksBuilderTest {

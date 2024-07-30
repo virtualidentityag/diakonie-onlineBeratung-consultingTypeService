@@ -10,7 +10,7 @@ import de.caritas.cob.consultingtypeservice.api.model.NotificationsDTO;
 import de.caritas.cob.consultingtypeservice.api.model.SessionDataInitializingDTO;
 import de.caritas.cob.consultingtypeservice.api.model.WelcomeMessageDTO;
 import de.caritas.cob.consultingtypeservice.api.model.WhiteSpotDTO;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ConsultingTypeMapperTest {
 
