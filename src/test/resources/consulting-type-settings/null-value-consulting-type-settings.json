@@ -28,8 +28,6 @@
     "isGroupChat": false,
     "groupChatRules": null
   },
-  "initializeFeedbackChat": false,
-  "isPeerChat": false,
   "languageFormal": true,
   "roles": {
     "consultant": {

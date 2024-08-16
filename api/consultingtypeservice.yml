@@ -364,12 +364,6 @@ components:
         sendFurtherStepsMessage:
           type: boolean
           example: true
-        initializeFeedbackChat:
-          type: boolean
-          example: true
-        isPeerChat:
-          type: boolean
-          example: true
         furtherInformation:
           allOf:
             - $ref: '#/components/schemas/FurtherInformationDTO'

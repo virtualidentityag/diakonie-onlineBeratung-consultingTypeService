@@ -77,8 +77,6 @@ public class ConsultingTypeConverter {
         .withWelcomeMessage(convert(consultingTypeDTO.getWelcomeMessage()))
         .withSendFurtherStepsMessage(consultingTypeDTO.getSendFurtherStepsMessage())
         .withSessionDataInitializing(convert(consultingTypeDTO.getSessionDataInitializing()))
-        .withInitializeFeedbackChat(consultingTypeDTO.getInitializeFeedbackChat())
-        .withIsPeerChat(consultingTypeDTO.getIsPeerChat())
         .withLanguageFormal(consultingTypeDTO.getLanguageFormal())
         .withRoles(convert(consultingTypeDTO.getRoles()))
         .withNotifications(convert(consultingTypeDTO.getNotifications()))
