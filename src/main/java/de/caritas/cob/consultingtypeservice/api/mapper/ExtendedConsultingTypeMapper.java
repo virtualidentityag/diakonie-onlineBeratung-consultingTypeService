@@ -32,8 +32,6 @@ public class ExtendedConsultingTypeMapper extends ConsultingTypeMapper {
         .isAnonymousConversationAllowed(consultingType.getIsAnonymousConversationAllowed())
         .sessionDataInitializing(
             mapSessionDataInitializing(consultingType.getSessionDataInitializing()))
-        .initializeFeedbackChat(consultingType.getInitializeFeedbackChat())
-        .isPeerChat(consultingType.getIsPeerChat())
         .languageFormal(consultingType.getLanguageFormal())
         .roles(mapRoles(consultingType.getRoles()))
         .notifications(mapNotifications(consultingType.getNotifications()))
