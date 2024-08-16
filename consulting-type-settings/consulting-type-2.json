@@ -37,8 +37,6 @@
       "Lorem ipsum"
     ]
   },
-  "initializeFeedbackChat": false,
-  "isPeerChat": false,
   "languageFormal": true,
   "roles": {
     "consultant": {

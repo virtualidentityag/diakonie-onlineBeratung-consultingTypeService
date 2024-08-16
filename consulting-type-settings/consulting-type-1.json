@@ -4,8 +4,6 @@
   "slug": "consultingtype1",
   "excludeNonMainConsultantsFromTeamSessions": false,
   "consultantBoundedToConsultingType": false,
-  "initializeFeedbackChat": true,
-  "isPeerChat": true,
   "isVideoCallAllowed": false,
   "languageFormal": true,
   "roles": {
